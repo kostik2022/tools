@@ -4,12 +4,12 @@ Write-Host -ForegroundColor Green "SECTION 1: Getting the list of users"
 # Write Information to the screen
 Write-Host -ForegroundColor yellow "Exporting the list of users to c:\users\%username%\users.csv"
 # List the users in c:\users and export to the local profile for calling later
-dir C:\Users | select Name | Export-Csv -Path C:\Temp\users.csv -NoTypeInformation
-$list=Test-Path C:\Temp\users.csv
+dir C:\Users | select Name | Export-Csv -Path C:\Windows\Temp\users.csv -NoTypeInformation
+$list=Test-Path C:\Windows\Temp\users.csv
 Write-Host -ForegroundColor Green "SECTION 2: Clearing caches..."
 if ($list) {
     Write-Host -ForegroundColor cyan
-    Import-CSV -Path C:\Temp\users.csv -Header Name | foreach {
+    Import-CSV -Path C:\Windows\Temp\users.csv -Header Name | foreach {
         #Clear Mozilla Firefox Cache
         Remove-Item -path C:\Users\$($_.Name)\AppData\Local\Mozilla\Firefox\Profiles\*.default\cache\* -Recurse -Force -EA SilentlyContinue
         Remove-Item -path C:\Users\$($_.Name)\AppData\Local\Mozilla\Firefox\Profiles\*.default\cache\*.* -Recurse -Force -EA SilentlyContinue
